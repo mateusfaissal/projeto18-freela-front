@@ -1,16 +1,22 @@
 import { createGlobalStyle } from "styled-components";
 
-const GlobalStyle = createGlobalStyle`
+const GlobalStyle = createGlobalStyle`    
+    
+    body{
+        background-color: salmon;
+    }
+    
     * {
         font-family: 'Raleway';
         font-style: normal;
         font-weight: 400;
+    
     }
     button {
         outline: none;
         border: none;
         border-radius: 5px;
-        background-color: #a328d6;
+        background-color: lightsalmon;
         font-size: 20px;
         font-weight: 600;
         color: #fff;
@@ -21,7 +27,7 @@ const GlobalStyle = createGlobalStyle`
     h1 {
         font-weight: 700;
         font-size: 26px;
-        color: black;
+        color: white;
     }
     input {
         font-size: 20px;
