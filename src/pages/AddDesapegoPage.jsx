@@ -6,51 +6,51 @@ import tokenContext from "../contexts/TokenContext"
 
 export default function AddDesapegoPage() {
 
-  const navigate = useNavigate();
-  const [token, setToken] = useContext(tokenContext);
-  const [price, setPrice] = useState("");
-  const [description, setDescription] = useState("");
-  const [name, setName] = useState("");
-  const [photo, setPhoto] = useState("");
-  const [category, setCategory] = useState("");
-  const [isActive, setisActive] = useState(true);
+    const navigate = useNavigate();
+    const [token, setToken] = useContext(tokenContext);
+    const [price, setPrice] = useState("");
+    const [description, setDescription] = useState("");
+    const [name, setName] = useState("");
+    const [photo, setPhoto] = useState("");
+    const [category, setCategory] = useState("");
+    const [isActive, setisActive] = useState(true);
 
 
-  const newToken = token;
+    const newToken = token;
 
 
-  const config = {
-    headers: {
-      Authorization: `Bearer ${newToken}`
+    const config = {
+        headers: {
+            Authorization: `Bearer ${newToken}`
+        }
     }
-  }
 
-  function postDesapego(e) {
+    function postDesapego(e) {
 
-    e.preventDefault();
+        e.preventDefault();
 
 
-    axios.post(`${import.meta.env.VITE_API_URL}/newproduct`, { name, price, photo, description, category, isActive }, config)
-      .then(() => navigate("/home"))
-      .catch(err => console.log(err))
-  }
-
+        axios.post(`${process.env.REACT_APP_API_URL}/newproduct`, { name, price, photo, description, category, isActive }, config)
+            .then(() => navigate("/home"))
+            .catch(err => console.log(err))
+    }
 
 
 
-  return (
-    <TransactionsContainer>
-      <h1>novo desapego</h1>
-      <form onSubmit={postDesapego}>
-        <input placeholder="nome" type="text" value={name} onChange={e => setName(e.target.value)} />
-        <input placeholder="preço" type="text" value={price} onChange={e => setPrice(e.target.value)} />
-        <input placeholder="foto" type="text" value={photo} onChange={e => setPhoto(e.target.value)} />
-        <input placeholder="descrição" type="text" value={description} onChange={e => setDescription(e.target.value)} />
-        <input placeholder="categoria" type="text" value={category} onChange={e => setCategory(e.target.value)} />
-        <button>salvar desapego</button>
-      </form>
-    </TransactionsContainer>
-  )
+
+    return (
+        <TransactionsContainer>
+            <h1>novo desapego</h1>
+            <form onSubmit={postDesapego}>
+                <input placeholder="nome" type="text" value={name} onChange={e => setName(e.target.value)} />
+                <input placeholder="preço" type="text" value={price} onChange={e => setPrice(e.target.value)} />
+                <input placeholder="foto" type="text" value={photo} onChange={e => setPhoto(e.target.value)} />
+                <input placeholder="descrição" type="text" value={description} onChange={e => setDescription(e.target.value)} />
+                <input placeholder="categoria" type="text" value={category} onChange={e => setCategory(e.target.value)} />
+                <button>salvar desapego</button>
+            </form>
+        </TransactionsContainer>
+    )
 }
 
 const TransactionsContainer = styled.main`

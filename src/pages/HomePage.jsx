@@ -20,21 +20,21 @@ export default function HomePage() {
         }
     }
 
-      useEffect(() => {
+    useEffect(() => {
 
-         axios.get(`${import.meta.env.VITE_API_URL}/products`, config)
-          .then((res) => {
-            setProducts(res.data)
-          })
-          .catch((err) => {
-            alert(err)
-            navigate("/")
-          })
+        axios.get(`${process.env.REACT_APP_API_URL}/products`, config)
+            .then((res) => {
+                setProducts(res.data)
+            })
+            .catch((err) => {
+                alert(err)
+                navigate("/")
+            })
 
-      }, []);
+    }, []);
 
-      console.log(products)
-      
+   
+
 
     return (
         <HomeContainer>
@@ -63,17 +63,17 @@ export default function HomePage() {
                     <ProductName> 199,90 </ProductName>
                 </div>
                 {products.map(product => {
-            if (product.isActive) {
-              return (
-                  <div onClick={() => navigate(`/info-desapego/${product.id}`)}>
-                 <ProductImage src={product.photo} />
-                 <ProductName> {product.description} </ProductName>
-                 <ProductName> {product.price} </ProductName>
-                </div>
-              )
-            }
-          }
-          )}
+                    if (product.isActive) {
+                        return (
+                            <div onClick={() => navigate(`/info-desapego/${product.id}`)}>
+                                <ProductImage src={product.photo} />
+                                <ProductName> {product.description} </ProductName>
+                                <ProductName> {product.price} </ProductName>
+                            </div>
+                        )
+                    }
+                }
+                )}
             </ProductContainer>
 
 

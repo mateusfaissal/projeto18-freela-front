@@ -24,7 +24,7 @@ export default function InfoDesapegoPage() {
 
     useEffect(() => {
 
-        axios.get(`${import.meta.env.VITE_API_URL}/products/${idProduct}`, config)
+        axios.get(`${process.env.REACT_APP_API_URL}/products/${idProduct}`, config)
             .then((res) => {
                 setProducts(res.data)
             })
@@ -35,7 +35,6 @@ export default function InfoDesapegoPage() {
 
     }, []);
 
-    console.log(products);
 
     return (
         <HomeContainer>
@@ -49,9 +48,9 @@ export default function InfoDesapegoPage() {
                     <ProductName> <p>descrição: {products.description} </p></ProductName>
                     <ProductName> <p>categoria: {products.category} </p></ProductName>
                     <ProductName> <p> preço: {products.price}</p> </ProductName>
-                    <ProductName> <p>infos do dono</p> <hr/> <p> nome: {products.productsProvider}</p>
-                    <p> email: {products.email}</p>
-                    <p> telefone: {products.phone}</p>
+                    <ProductName> <p>infos do dono</p> <hr /> <p> nome: {products.productsProvider}</p>
+                        <p> email: {products.email}</p>
+                        <p> telefone: {products.phone}</p>
                     </ProductName>
                 </div>
             </ProductContainer>

@@ -20,23 +20,22 @@ export default function MyDesapegoPage() {
         }
     }
 
-      useEffect(() => {
+    useEffect(() => {
 
-         axios.get(`${import.meta.env.VITE_API_URL}/me`, config)
-          .then((res) => {
-            setProducts(res.data)
-            console.log(res.data)
-          })
-          .catch((err) => {
-            alert(err)
-            navigate("/")
-          })
+        axios.get(`${process.env.REACT_APP_API_URL}/me`, config)
+            .then((res) => {
+                setProducts(res.data)
+            })
+            .catch((err) => {
+                alert(err)
+                navigate("/")
+            })
 
-      }, []);
+    }, []);
 
-    
 
-      
+
+
 
     return (
         <HomeContainer>
@@ -56,20 +55,20 @@ export default function MyDesapegoPage() {
             <ProductContainer>
 
                 {products.map(product => {
-            if (product.isActive || !product.isActive) {
-              return (
-                <>
-                  <div onClick={() => navigate(`/my-desapego/${product.id}`)}>
-                 <ProductImage src={product.photo} />
-                 <ProductName> {product.description} </ProductName>
-                 <ProductName> {product.price} </ProductName>
-                </div>
+                    if (product.isActive || !product.isActive) {
+                        return (
+                            <>
+                                <div onClick={() => navigate(`/my-desapego/${product.id}`)}>
+                                    <ProductImage src={product.photo} />
+                                    <ProductName> {product.description} </ProductName>
+                                    <ProductName> {product.price} </ProductName>
+                                </div>
 
-                </>
-              )
-            }
-          }
-          )}
+                            </>
+                        )
+                    }
+                }
+                )}
             </ProductContainer>
 
 

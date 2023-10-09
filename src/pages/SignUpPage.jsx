@@ -21,7 +21,7 @@ export default function SignUpPage() {
 
     if (password !== confPassword) return alert("Password must be equal!");
 
-    axios.post(`${import.meta.env.VITE_API_URL}/signup`, { name, cpf, phone, email, password })
+    axios.post(`${process.env.REACT_APP_API_URL}/signup`, { name, cpf, phone, email, password })
       .then(() => navigate("/"))
       .catch((err) => alert(err.message))
 

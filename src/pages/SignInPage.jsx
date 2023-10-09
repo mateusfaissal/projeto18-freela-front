@@ -24,7 +24,7 @@ export default function SignInPage() {
 
     e.preventDefault();
 
-    axios.post(`${import.meta.env.VITE_API_URL}/signin`, { email, password })
+    axios.post(`${process.env.REACT_APP_API_URL}/signin`, { email, password })
       .then((res) => {
         handleToken(res.data)
       })
@@ -37,7 +37,7 @@ export default function SignInPage() {
   return (
     <SignInContainer>
       <form onSubmit={signIn}>
-        
+
         <MeCanseiLogo />
 
         <input placeholder="e-mail" type="email" value={email} onChange={e => setEmail(e.target.value)} required />

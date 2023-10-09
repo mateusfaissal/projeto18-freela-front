@@ -23,7 +23,7 @@ export default function MyDesapegoPageById() {
 
     useEffect(() => {
 
-        axios.get(`${import.meta.env.VITE_API_URL}/products/${idProduct}`, config)
+        axios.get(`${process.env.REACT_APP_API_URL}/products/${idProduct}`, config)
             .then((res) => {
                 setProducts(res.data)
             })
@@ -34,24 +34,24 @@ export default function MyDesapegoPageById() {
 
     }, []);
 
-    function disabledProduct(){
-        //console.log(id);
-        
+    function disabledProduct() {
+
+
         const config = {
             headers: {
-              Authorization: `Bearer ${token}`
+                Authorization: `Bearer ${token}`
             }
-          }
+        }
 
-        const promise = axios.put(`${import.meta.env.VITE_API_URL}/products/${idProduct}`,config);
-        promise.then((resposta) => {
-            console.log(resposta.data);
+        const promise = axios.put(`${process.env.REACT_APP_API_URL}/products/${idProduct}`, config);
+        promise.then(() => {
+            alert("desapego desativado/ativado com sucesso :)")
         });
-        promise.catch( erro => { 
-            console.log();(erro.response.data)
+        promise.catch(err => {
+            alert(err.response.data)
         });
 
-      }
+    }
 
     console.log(products);
 
@@ -67,12 +67,12 @@ export default function MyDesapegoPageById() {
                     <ProductName> <p>descrição: {products.description} </p></ProductName>
                     <ProductName> <p>categoria: {products.category} </p></ProductName>
                     <ProductName> <p> preço: {products.price}</p> </ProductName>
-                    <ProductName> <p>infos do dono</p> <hr/> <p> nome: {products.productsProvider}</p>
-                    <p> email: {products.email}</p>
-                    <p> telefone: {products.phone}</p>
+                    <ProductName> <p>infos do dono</p> <hr /> <p> nome: {products.productsProvider}</p>
+                        <p> email: {products.email}</p>
+                        <p> telefone: {products.phone}</p>
                     </ProductName>
                 </div>
-                <button onClick={() => disabledProduct()}>Ativar/Desativar</button>
+                <button onClick={() => disabledProduct()}>desativar/ativar</button>
             </ProductContainer>
         </HomeContainer>
     )
