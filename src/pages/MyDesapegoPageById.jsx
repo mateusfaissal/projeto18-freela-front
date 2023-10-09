@@ -5,8 +5,7 @@ import { styled } from "styled-components";
 import MeCanseiLogo from "../components/MeCanseiLogo";
 import tokenContext from "../contexts/TokenContext";
 
-export default function InfoDesapegoPage() {
-
+export default function MyDesapegoPageById() {
     const [products, setProducts] = useState([]);
     const navigate = useNavigate();
     const { idProduct } = useParams();
@@ -35,6 +34,25 @@ export default function InfoDesapegoPage() {
 
     }, []);
 
+    function disabledProduct(){
+        //console.log(id);
+        
+        const config = {
+            headers: {
+              Authorization: `Bearer ${token}`
+            }
+          }
+
+        const promise = axios.put(`${import.meta.env.VITE_API_URL}/products/${idProduct}`,config);
+        promise.then((resposta) => {
+            console.log(resposta.data);
+        });
+        promise.catch( erro => { 
+            console.log();(erro.response.data)
+        });
+
+      }
+
     console.log(products);
 
     return (
@@ -54,6 +72,7 @@ export default function InfoDesapegoPage() {
                     <p> telefone: {products.phone}</p>
                     </ProductName>
                 </div>
+                <button onClick={() => disabledProduct()}>Ativar/Desativar</button>
             </ProductContainer>
         </HomeContainer>
     )
@@ -129,5 +148,6 @@ const ButtonsContainer = styled.section`
     }
   }
 `
+
 
 

@@ -8,6 +8,7 @@ import tokenContext from "./contexts/TokenContext"
 import AddDesapegoPage from "./pages/AddDesapegoPage"
 import MyDesapegoPage from "./pages/MyDesapegoPage"
 import InfoDesapegoPage from "./pages/InfoDesapegoPage"
+import MyDesapegoPageById from "./pages/MyDesapegoPageById"
 
 export default function App() {
 
@@ -25,6 +26,7 @@ export default function App() {
             <Route path="/add-desapego" element={<AddDesapegoPage />} />
             <Route path="/my-desapego" element={<MyDesapegoPage />} />
             <Route path="/info-desapego/:idProduct" element={<InfoDesapegoPage />} />
+            <Route path="/my-desapego/:idProduct" element={<MyDesapegoPageById />} />
           </Routes>
         </BrowserRouter>
       </PagesContainer>

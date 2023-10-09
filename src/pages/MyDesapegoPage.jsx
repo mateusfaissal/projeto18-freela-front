@@ -34,6 +34,8 @@ export default function MyDesapegoPage() {
 
       }, []);
 
+    
+
       
 
     return (
@@ -54,13 +56,16 @@ export default function MyDesapegoPage() {
             <ProductContainer>
 
                 {products.map(product => {
-            if (product.isActive) {
+            if (product.isActive || !product.isActive) {
               return (
-                  <div onClick={() => navigate(`/info-desapego/${product.id}`)}>
+                <>
+                  <div onClick={() => navigate(`/my-desapego/${product.id}`)}>
                  <ProductImage src={product.photo} />
                  <ProductName> {product.description} </ProductName>
                  <ProductName> {product.price} </ProductName>
                 </div>
+
+                </>
               )
             }
           }
