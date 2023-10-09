@@ -7,6 +7,7 @@ import { useState } from "react"
 import tokenContext from "./contexts/TokenContext"
 import AddDesapegoPage from "./pages/AddDesapegoPage"
 import MyDesapegoPage from "./pages/MyDesapegoPage"
+import InfoDesapegoPage from "./pages/InfoDesapegoPage"
 
 export default function App() {
 
@@ -23,6 +24,7 @@ export default function App() {
             <Route path="/home" element={<HomePage />} />
             <Route path="/add-desapego" element={<AddDesapegoPage />} />
             <Route path="/my-desapego" element={<MyDesapegoPage />} />
+            <Route path="/info-desapego/:idProduct" element={<InfoDesapegoPage />} />
           </Routes>
         </BrowserRouter>
       </PagesContainer>

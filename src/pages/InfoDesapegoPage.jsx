@@ -1,15 +1,18 @@
-import styled from "styled-components"
-import { Link, useNavigate } from "react-router-dom";
-import tokenContext from "../contexts/TokenContext";
 import axios from "axios";
-import { useContext, useEffect, useState } from "react";
+import { useState, useEffect, useContext } from "react";
+import { useNavigate, useParams } from "react-router-dom";
+import { styled } from "styled-components";
 import MeCanseiLogo from "../components/MeCanseiLogo";
+import tokenContext from "../contexts/TokenContext";
 
-export default function MyDesapegoPage() {
+export default function InfoDesapegoPage() {
 
-    const navigate = useNavigate();
-    const [token, setToken] = useContext(tokenContext);
     const [products, setProducts] = useState([]);
+    //const [array, setArray] = useState([]);
+    const navigate = useNavigate();
+    const { idProduct } = useParams();
+    const [token, setToken] = useContext(tokenContext);
+
 
     const newToken = token;
 
@@ -20,54 +23,39 @@ export default function MyDesapegoPage() {
         }
     }
 
-      useEffect(() => {
+    useEffect(() => {
 
-         axios.get(`${import.meta.env.VITE_API_URL}/me`, config)
-          .then((res) => {
-            setProducts(res.data)
-            console.log(res.data)
-          })
-          .catch((err) => {
-            alert(err)
-            navigate("/")
-          })
+        axios.get(`${import.meta.env.VITE_API_URL}/products/${idProduct}`, config)
+            .then((res) => {
+                setProducts(res.data)
+            })
+            .catch((err) => {
+                alert(err)
+                navigate("/")
+            })
 
-      }, []);
+    }, []);
 
-      
+    console.log(products);
 
     return (
         <HomeContainer>
             <Header>
                 <MeCanseiLogo />
             </Header>
-
-            <ButtonsContainer>
-                <button onClick={() => { navigate('/add-desapego') }}>
-                    <p>novo desapego</p>
-                </button>
-            </ButtonsContainer>
-
-            <Title> todos os seus desapegos :)</Title>
-
-
             <ProductContainer>
-
-                {products.map(product => {
-            if (product.isActive) {
-              return (
-                  <div onClick={() => navigate(`/info-desapego/${product.id}`)}>
-                 <ProductImage src={product.photo} />
-                 <ProductName> {product.description} </ProductName>
-                 <ProductName> {product.price} </ProductName>
+                <div>
+                    <ProductImage src={products.photo} />
+                    <ProductName> <p>desapego: {products.name} </p></ProductName>
+                    <ProductName> <p>descrição: {products.description} </p></ProductName>
+                    <ProductName> <p>categoria: {products.category} </p></ProductName>
+                    <ProductName> <p> preço: {products.price}</p> </ProductName>
+                    <ProductName> <p>infos do dono</p> <hr/> <p> nome: {products.productsProvider}</p>
+                    <p> email: {products.email}</p>
+                    <p> telefone: {products.phone}</p>
+                    </ProductName>
                 </div>
-              )
-            }
-          }
-          )}
             </ProductContainer>
-
-
         </HomeContainer>
     )
 }
@@ -75,12 +63,14 @@ export default function MyDesapegoPage() {
 const HomeContainer = styled.div`
   display: flex;
   flex-direction: column;
+  justify-content: center;
+  align-items: center;
   background-color: salmon;
 `
 const Header = styled.header`
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: space-between;
   padding: 0 2px 5px 2px;
   margin-bottom: 15px;
   font-size: 26px;
@@ -126,9 +116,6 @@ const ButtonsContainer = styled.section`
   margin-bottom: 15px;
   display: flex;
   gap: 15px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
   
   button {
     width: 50%;
@@ -143,3 +130,5 @@ const ButtonsContainer = styled.section`
     }
   }
 `
+
+
