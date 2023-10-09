@@ -6,11 +6,14 @@ import tokenContext from "../contexts/TokenContext"
 
 export default function AddDesapegoPage() {
 
-  const { tipo } = useParams();
   const navigate = useNavigate();
   const [token, setToken] = useContext(tokenContext);
-  const [value, setValue] = useState("");
+  const [price, setPrice] = useState("");
   const [description, setDescription] = useState("");
+  const [name, setName] = useState("");
+  const [photo, setPhoto] = useState("");
+  const [category, setCategory] = useState("");
+  const [isActive, setisActive] = useState(true);
 
 
   const newToken = token;
@@ -27,7 +30,7 @@ export default function AddDesapegoPage() {
     e.preventDefault();
 
 
-    axios.post(`${import.meta.env.VITE_API_URL}/transaction/${tipo}`, { value: newValue, description }, config)
+    axios.post(`${import.meta.env.VITE_API_URL}/newproduct`, { name, price, photo, description, category, isActive }, config)
       .then(() => navigate("/home"))
       .catch(err => console.log(err))
   }
@@ -39,10 +42,11 @@ export default function AddDesapegoPage() {
     <TransactionsContainer>
       <h1>novo desapego</h1>
       <form onSubmit={postDesapego}>
-        <input placeholder="nome" type="text" value={value} onChange={e => setName(e.target.value)} />
-        <input placeholder="foto" type="text" value={description} onChange={e => setPhoto(e.target.value)} />
+        <input placeholder="nome" type="text" value={name} onChange={e => setName(e.target.value)} />
+        <input placeholder="preço" type="text" value={price} onChange={e => setPrice(e.target.value)} />
+        <input placeholder="foto" type="text" value={photo} onChange={e => setPhoto(e.target.value)} />
         <input placeholder="descrição" type="text" value={description} onChange={e => setDescription(e.target.value)} />
-        <input placeholder="categoria" type="text" value={description} onChange={e => setCategory(e.target.value)} />
+        <input placeholder="categoria" type="text" value={category} onChange={e => setCategory(e.target.value)} />
         <button>salvar desapego</button>
       </form>
     </TransactionsContainer>
