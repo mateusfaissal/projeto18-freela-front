@@ -24,7 +24,7 @@ export default function SignInPage() {
 
     e.preventDefault();
 
-    axios.post(`${import.meta.env.VITE_API_URL}/sign-in`, { email, password })
+    axios.post(`${import.meta.env.VITE_API_URL}/signin`, { email, password })
       .then((res) => {
         handleToken(res.data)
       })

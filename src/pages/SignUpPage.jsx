@@ -10,6 +10,8 @@ export default function SignUpPage() {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [cpf, setCpf] = useState("");
+  const [phone, setPhone] = useState("");
   const [confPassword, setConfPassword] = useState("");
   const navigate = useNavigate();
 
@@ -19,7 +21,7 @@ export default function SignUpPage() {
 
     if (password !== confPassword) return alert("Password must be equal!");
 
-    axios.post(`${import.meta.env.VITE_API_URL}/sign-up`, { name, email, password })
+    axios.post(`${import.meta.env.VITE_API_URL}/signup`, { name, cpf, phone, email, password })
       .then(() => navigate("/"))
       .catch((err) => alert(err.message))
 
@@ -30,8 +32,8 @@ export default function SignUpPage() {
       <form onSubmit={signUp}>
         <MeCanseiLogo />
         <input placeholder="nome" type="text" value={name} onChange={e => setName(e.target.value)} required />
-        <input placeholder="cpf" type="password" value={password} onChange={e => setPassword(e.target.value)} required />
-        <input placeholder="telefone" type="password" value={password} onChange={e => setPassword(e.target.value)} required />
+        <input placeholder="cpf" type="text" value={cpf} onChange={e => setCpf(e.target.value)} required />
+        <input placeholder="telefone" type="text" value={phone} onChange={e => setPhone(e.target.value)} required />
         <input placeholder="e-mail" type="email" value={email} onChange={e => setEmail(e.target.value)} required />
         <input placeholder="senha" type="password" value={password} onChange={e => setPassword(e.target.value)} required />
         <input placeholder="confirme a senha" type="password" value={confPassword} onChange={e => setConfPassword(e.target.value)} required />
